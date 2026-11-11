@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Lightbox from "../components/Lightbox";
+import Parallax from "../components/Parallax";
 import ProjectCard from "../components/ProjectCard";
 import aperture from "@/pictures/aperture.png";
 import {
@@ -91,7 +92,43 @@ function Hero() {
 		target: ref,
 		offset: ["start start", "end start"],
 	});
-	const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+
+	// parallax layers: each moves at a different rate for depth
+	const imgY = useTransform(
+		scrollYProgress,
+		[0, 1],
+		["0%", reduce ? "0%" : "32%"],
+	);
+	const textY = useTransform(
+		scrollYProgress,
+		[0, 1],
+		["0%", reduce ? "0%" : "-28%"],
+	);
+	const textOpacity = useTransform(
+		scrollYProgress,
+		[0, 0.7],
+		[1, reduce ? 1 : 0],
+	);
+	const apertureY = useTransform(
+		scrollYProgress,
+		[0, 1],
+		["0%", reduce ? "0%" : "120%"],
+	);
+	const apertureRotate = useTransform(
+		scrollYProgress,
+		[0, 1],
+		[0, reduce ? 0 : 90],
+	);
+	const washY = useTransform(
+		scrollYProgress,
+		[0, 1],
+		["0%", reduce ? "0%" : "55%"],
+	);
+	const railY = useTransform(
+		scrollYProgress,
+		[0, 1],
+		["0%", reduce ? "0%" : "-80%"],
+	);
 
 	const stagger = {
 		hidden: {},
@@ -113,29 +150,37 @@ function Hero() {
 
 	return (
 		<section ref={ref} className="relative overflow-hidden">
-			{/* warm ambient wash */}
-			<div
+			{/* warm ambient wash (slowest layer) */}
+			<motion.div
 				aria-hidden="true"
-				className="pointer-events-none absolute inset-0"
 				style={{
+					y: washY,
 					background:
 						"radial-gradient(52% 42% at 82% 12%, rgba(212,175,94,0.16), transparent 70%), radial-gradient(40% 36% at 6% 88%, rgba(108,21,30,0.07), transparent 70%)",
 				}}
+				className="pointer-events-none absolute inset-0"
 			/>
-			<div
+			{/* aperture: outer layer handles parallax, inner handles the CSS spin
+			    (kept separate so the two transforms don't fight) */}
+			<motion.div
 				aria-hidden="true"
-				className="pointer-events-none absolute -left-28 top-24 hidden h-[380px] w-[380px] animate-spin-slower bg-wine-600 opacity-20 lg:block"
-				style={{
-					WebkitMaskImage: `url(${aperture.src})`,
-					maskImage: `url(${aperture.src})`,
-					WebkitMaskSize: "contain",
-					maskSize: "contain",
-					WebkitMaskRepeat: "no-repeat",
-					maskRepeat: "no-repeat",
-					WebkitMaskPosition: "center",
-					maskPosition: "center",
-				}}
-			/>
+				style={{ y: apertureY, rotate: apertureRotate }}
+				className="pointer-events-none absolute -left-28 top-24 hidden h-[380px] w-[380px] lg:block"
+			>
+				<div
+					className="h-full w-full animate-spin-slower bg-wine-600 opacity-20"
+					style={{
+						WebkitMaskImage: `url(${aperture.src})`,
+						maskImage: `url(${aperture.src})`,
+						WebkitMaskSize: "contain",
+						maskSize: "contain",
+						WebkitMaskRepeat: "no-repeat",
+						maskRepeat: "no-repeat",
+						WebkitMaskPosition: "center",
+						maskPosition: "center",
+					}}
+				/>
+			</motion.div>
 			{/* <Aperture
         className="pointer-events-none absolute -left-28 top-24 hidden h-[380px] w-[380px] text-wine-600/[0.05] animate-spin-slower lg:block"
         strokeWidth={0.5}
@@ -144,88 +189,93 @@ function Hero() {
 			<div className="relative mx-auto grid min-h-svh max-w-[1600px] items-center gap-12 px-5 pb-16 pt-[118px] sm:px-8 lg:grid-cols-[0.94fr_1.06fr] lg:gap-14 lg:px-14 lg:pb-20">
 				{/* left — editorial introduction */}
 				<motion.div
-					variants={stagger}
-					initial="hidden"
-					animate="show"
+					style={{ y: textY, opacity: textOpacity }}
 					className="relative z-10"
 				>
-					<motion.div variants={item}>
-						<Kicker>
-							Independent photographer · Available worldwide
-						</Kicker>
-					</motion.div>
-
-					<motion.h1
-						variants={item}
-						className="mt-8 font-display text-[clamp(3.6rem,8.2vw,7.6rem)] font-light leading-[0.93] tracking-[-0.04em] text-ink-900"
-					>
-						The art of
-						<br />
-						seeing{" "}
-						<span className="relative inline-block italic text-wine-600">
-							differently.
-							<svg
-								className="absolute -bottom-3 left-0 w-full text-brass-500"
-								viewBox="0 0 300 12"
-								fill="none"
-								aria-hidden="true"
-							>
-								<path
-									d="M4 8 C 80 2, 220 2, 296 7"
-									stroke="currentColor"
-									strokeWidth="2.5"
-									strokeLinecap="round"
-								/>
-							</svg>
-						</span>
-					</motion.h1>
-
-					<motion.p
-						variants={item}
-						className="mt-9 max-w-md text-[15px] leading-[1.95] text-ink-500"
-					>
-						Thoughtful imagery for the moments, people, and places
-						that deserve to be remembered. A study of light,
-						emotion, and the beauty in between.
-					</motion.p>
-
 					<motion.div
-						variants={item}
-						className="mt-10 flex flex-wrap items-center gap-7"
+						variants={stagger}
+						initial="hidden"
+						animate="show"
 					>
-						<Link to="/portfolio">
-							<ButtonSolid>Explore the work</ButtonSolid>
-						</Link>
-						<Link to="/about">
-							<ArrowLink>The photographer</ArrowLink>
-						</Link>
-					</motion.div>
+						<motion.div variants={item}>
+							<Kicker>
+								Independent photographer · Available worldwide
+							</Kicker>
+						</motion.div>
 
-					<motion.div
-						variants={item}
-						className="mt-14 flex items-center gap-6 border-t border-ink-900/10 pt-6"
-					>
-						<div>
-							<p className="font-display text-2xl tracking-tight text-ink-900">
-								01—08
+						<motion.h1
+							variants={item}
+							className="mt-8 font-display text-[clamp(3.6rem,8.2vw,7.6rem)] font-light leading-[0.93] tracking-[-0.04em] text-ink-900"
+						>
+							The art of
+							<br />
+							seeing{" "}
+							<span className="relative inline-block italic text-wine-600">
+								differently.
+								<svg
+									className="absolute -bottom-3 left-0 w-full text-brass-500"
+									viewBox="0 0 300 12"
+									fill="none"
+									aria-hidden="true"
+								>
+									<path
+										d="M4 8 C 80 2, 220 2, 296 7"
+										stroke="currentColor"
+										strokeWidth="2.5"
+										strokeLinecap="round"
+									/>
+								</svg>
+							</span>
+						</motion.h1>
+
+						<motion.p
+							variants={item}
+							className="mt-9 max-w-md text-[15px] leading-[1.95] text-ink-500"
+						>
+							Thoughtful imagery for the moments, people, and
+							places that deserve to be remembered. A study of
+							light, emotion, and the beauty in between.
+						</motion.p>
+
+						<motion.div
+							variants={item}
+							className="mt-10 flex flex-wrap items-center gap-7"
+						>
+							<Link to="/portfolio">
+								<ButtonSolid>Explore the work</ButtonSolid>
+							</Link>
+							<Link to="/about">
+								<ArrowLink>The photographer</ArrowLink>
+							</Link>
+						</motion.div>
+
+						<motion.div
+							variants={item}
+							className="mt-14 flex items-center gap-6 border-t border-ink-900/10 pt-6"
+						>
+							<div>
+								<p className="font-display text-2xl tracking-tight text-ink-900">
+									01—08
+								</p>
+								<Meta className="mt-1 block text-ink-500">
+									Selected stories
+								</Meta>
+							</div>
+							<span className="h-10 w-px bg-ink-900/10" />
+							<p className="max-w-[150px] text-[11px] leading-relaxed text-ink-500">
+								Creating timeless photographs with an editorial
+								eye.
 							</p>
-							<Meta className="mt-1 block text-ink-500">
-								Selected stories
-							</Meta>
-						</div>
-						<span className="h-10 w-px bg-ink-900/10" />
-						<p className="max-w-[150px] text-[11px] leading-relaxed text-ink-500">
-							Creating timeless photographs with an editorial eye.
-						</p>
-						<span className="hidden h-10 w-px bg-ink-900/10 sm:block" />
-						<div className="hidden sm:block">
-							<p className="font-display text-2xl italic tracking-tight text-pine-700">
-								Est. {site.est}
-							</p>
-							<Meta className="mt-1 block text-ink-500">
-								Lyon, France
-							</Meta>
-						</div>
+							<span className="hidden h-10 w-px bg-ink-900/10 sm:block" />
+							<div className="hidden sm:block">
+								<p className="font-display text-2xl italic tracking-tight text-pine-700">
+									Est. {site.est}
+								</p>
+								<Meta className="mt-1 block text-ink-500">
+									Lyon, France
+								</Meta>
+							</div>
+						</motion.div>
 					</motion.div>
 				</motion.div>
 
@@ -322,14 +372,15 @@ function Hero() {
 					</motion.div>
 
 					{/* vertical rail */}
-					<div
+					<motion.div
+						style={{ y: railY }}
 						className="absolute -right-8 top-8 hidden [writing-mode:vertical-rl] xl:block"
 						aria-hidden="true"
 					>
 						<Meta className="text-ink-400">
 							Photography · Art · Stories
 						</Meta>
-					</div>
+					</motion.div>
 				</motion.div>
 			</div>
 
@@ -369,34 +420,44 @@ function ServicesPreview() {
 	return (
 		<section className="relative overflow-hidden bg-pine-950 py-24 text-cream sm:py-32">
 			<FilmStrip className="absolute inset-x-0 top-0 text-brass-400" />
-			<div
-				aria-hidden="true"
+			{/* glow drifts slower than the content */}
+			<Parallax
+				speed={170}
 				className="pointer-events-none absolute inset-0"
-				style={{
-					background:
-						"radial-gradient(60% 50% at 85% 20%, rgba(47,107,88,0.25), transparent 70%)",
-				}}
-			/>
+			>
+				<div
+					aria-hidden="true"
+					className="h-full min-h-[900px] w-full"
+					style={{
+						background:
+							"radial-gradient(60% 50% at 85% 20%, rgba(47,107,88,0.25), transparent 70%)",
+					}}
+				/>
+			</Parallax>
 			<div className="relative mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-14">
 				<div className="mb-14 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-					<Reveal>
-						<Kicker tone="brass">What I offer</Kicker>
-						<SectionTitle className="mt-6 text-cream">
-							Four ways to
-							<br />
-							tell your{" "}
-							<span className="italic text-brass-300">
-								story.
-							</span>
-						</SectionTitle>
-					</Reveal>
-					<Reveal delay={0.15} className="max-w-xs">
-						<p className="text-sm leading-loose text-cream/50">
-							Every commission begins with a conversation and ends
-							with photographs that feel like memory — never like
-							a photoshoot.
-						</p>
-					</Reveal>
+					<Parallax speed={70}>
+						<Reveal>
+							<Kicker tone="brass">What I offer</Kicker>
+							<SectionTitle className="mt-6 text-cream">
+								Four ways to
+								<br />
+								tell your{" "}
+								<span className="italic text-brass-300">
+									story.
+								</span>
+							</SectionTitle>
+						</Reveal>
+					</Parallax>
+					<Parallax speed={-45}>
+						<Reveal delay={0.15} className="max-w-xs">
+							<p className="text-sm leading-loose text-cream/50">
+								Every commission begins with a conversation and
+								ends with photographs that feel like memory —
+								never like a photoshoot.
+							</p>
+						</Reveal>
+					</Parallax>
 				</div>
 
 				<div
@@ -528,10 +589,16 @@ function Testimonials() {
 						"radial-gradient(55% 60% at 15% 15%, rgba(143,47,51,0.5), transparent 70%)",
 				}}
 			/>
-			<Quote
-				className="pointer-events-none absolute -right-10 -top-10 h-64 w-64 text-cream/[0.04]"
-				aria-hidden="true"
-			/>
+			{/* big quote mark drifts against the scroll */}
+			<Parallax
+				speed={-190}
+				className="pointer-events-none absolute -right-10 -top-10"
+			>
+				<Quote
+					className="h-64 w-64 text-cream/[0.04]"
+					aria-hidden="true"
+				/>
+			</Parallax>
 			<div className="relative mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-14">
 				<div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24">
 					<Reveal>
@@ -656,6 +723,7 @@ export default function Home() {
 		{ src: projects[1].cover, alt: projects[1].alt },
 		{ src: projects[7].cover, alt: projects[7].alt },
 	];
+	const ctaSpeeds = [100, -80, 140];
 
 	return (
 		<>
@@ -679,79 +747,118 @@ export default function Home() {
 			<section id="selected-work" className="scroll-mt-24 py-24 sm:py-32">
 				<div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-14">
 					<div className="mb-16 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-						<Reveal>
-							<Kicker>Selected works · 2023 — 2025</Kicker>
-							<SectionTitle className="mt-6 text-ink-900">
-								Stories worth
-								<br />
-								<span className="italic text-wine-600">
-									keeping.
-								</span>
-							</SectionTitle>
-						</Reveal>
-						<Reveal delay={0.15} className="max-w-xs lg:pb-2">
-							<p className="text-sm leading-loose text-ink-500">
-								Eight frames from eight journeys — chosen not
-								because they are perfect, but because they are
-								true.
-							</p>
-							<Link to="/portfolio" className="mt-5 inline-block">
-								<ArrowLink>View all stories</ArrowLink>
-							</Link>
-						</Reveal>
+						<Parallax speed={70}>
+							<Reveal>
+								<Kicker>Selected works · 2023 — 2025</Kicker>
+								<SectionTitle className="mt-6 text-ink-900">
+									Stories worth
+									<br />
+									<span className="italic text-wine-600">
+										keeping.
+									</span>
+								</SectionTitle>
+							</Reveal>
+						</Parallax>
+						<Parallax speed={-45}>
+							<Reveal delay={0.15} className="max-w-xs lg:pb-2">
+								<p className="text-sm leading-loose text-ink-500">
+									Eight frames from eight journeys — chosen
+									not because they are perfect, but because
+									they are true.
+								</p>
+								<Link
+									to="/portfolio"
+									className="mt-5 inline-block"
+								>
+									<ArrowLink>View all stories</ArrowLink>
+								</Link>
+							</Reveal>
+						</Parallax>
 					</div>
 
+					{/* each card drifts at its own speed; grid classes live on the wrapper */}
 					<div className="grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-12">
-						<ProjectCard
-							project={featured[0]}
+						<Parallax
+							speed={50}
+							scale={0.06}
 							className="md:col-span-2 lg:col-span-7"
-						/>
-						<ProjectCard
-							project={featured[1]}
+						>
+							<ProjectCard project={featured[0]} />
+						</Parallax>
+						<Parallax
+							speed={170}
+							scale={0.08}
+							rotate={1.5}
 							className="lg:col-span-5 lg:mt-28"
-							delay={0.1}
-						/>
-						<ProjectCard
-							project={featured[2]}
-							aspect="aspect-[4/5]"
+						>
+							<ProjectCard project={featured[1]} delay={0.1} />
+						</Parallax>
+						<Parallax
+							speed={110}
+							scale={0.08}
+							rotate={-1.5}
 							className="lg:col-span-5 lg:-mt-10"
-							delay={0.05}
-						/>
-						<ProjectCard
-							project={featured[3]}
-							aspect="aspect-[4/5] lg:aspect-[16/10]"
+						>
+							<ProjectCard
+								project={featured[2]}
+								aspect="aspect-[4/5]"
+								delay={0.05}
+							/>
+						</Parallax>
+						<Parallax
+							speed={190}
+							scale={0.06}
 							className="lg:col-span-7 lg:mt-16"
-							delay={0.15}
-						/>
+						>
+							<ProjectCard
+								project={featured[3]}
+								aspect="aspect-[4/5] lg:aspect-[16/10]"
+								delay={0.15}
+							/>
+						</Parallax>
 					</div>
 				</div>
 			</section>
 
 			{/* ————— about preview ————— */}
 			<section className="relative overflow-hidden bg-cream-100 py-24 sm:py-32">
-				<Aperture
-					className="pointer-events-none absolute -bottom-24 -right-24 h-[340px] w-[340px] text-pine-700/[0.06] animate-spin-slower"
-					strokeWidth={0.6}
-				/>
+				<Parallax
+					speed={-150}
+					className="pointer-events-none absolute -bottom-24 -right-24"
+				>
+					<Aperture
+						className="h-[340px] w-[340px] text-pine-700/[0.06] animate-spin-slower"
+						strokeWidth={0.6}
+					/>
+				</Parallax>
 				<div className="relative mx-auto grid max-w-[1600px] items-center gap-16 px-5 sm:px-8 lg:grid-cols-2 lg:gap-24 lg:px-14">
 					<Reveal className="relative mx-auto w-full max-w-[520px]">
 						<div
 							className="absolute -left-4 -top-4 h-full w-full border border-brass-500/50"
 							aria-hidden="true"
 						/>
-						<Frame
-							src={imagery.aboutPortrait}
-							alt="Elena Lore holding a vintage film camera"
-							className="relative aspect-[4/5] shadow-frame"
-						/>
-						<div className="absolute -bottom-10 -right-4 w-40 rotate-3 border-[6px] border-cream bg-cream shadow-lift sm:-right-10 sm:w-48">
+						<Parallax speed={-55} scale={0.05}>
 							<Frame
-								src={imagery.aboutHands}
-								alt="Hands cradling a medium format camera"
-								className="aspect-[4/5]"
-								grade
+								src={imagery.aboutPortrait}
+								alt="Elena Lore holding a vintage film camera"
+								className="relative aspect-[4/5] shadow-frame"
 							/>
-						</div>
+						</Parallax>
+						{/* small photo moves faster than the portrait → depth */}
+						<Parallax
+							speed={120}
+							rotate={4}
+							className="absolute -bottom-10 -right-4 w-40 sm:-right-10 sm:w-48"
+						>
+							<div className="rotate-3 border-[6px] border-cream bg-cream shadow-lift">
+								<Frame
+									src={imagery.aboutHands}
+									alt="Hands cradling a medium format camera"
+									className="aspect-[4/5]"
+									grade
+								/>
+							</div>
+						</Parallax>
 						<div className="mt-5 flex items-center justify-between pr-2">
 							<Meta className="text-ink-500">
 								SELF-PORTRAIT · HASSELBLAD
@@ -760,57 +867,60 @@ export default function Home() {
 						</div>
 					</Reveal>
 
-					<div className="lg:pl-4">
-						<Reveal>
-							<Kicker>The photographer</Kicker>
-							<SectionTitle className="mt-6 text-ink-900">
-								Behind
-								<br />
-								the{" "}
-								<span className="italic text-pine-700">
-									lens.
-								</span>
-							</SectionTitle>
-						</Reveal>
-						<Reveal delay={0.1}>
-							<p className="mt-8 max-w-lg text-[15px] leading-[1.95] text-ink-500">
-								My journey began with a fascination for the way
-								light transforms ordinary moments into something
-								extraordinary. Today, my approach is rooted in
-								authenticity, artistic expression, and a belief
-								that the most meaningful images are the ones
-								that make you feel something.
-							</p>
-						</Reveal>
+					<Parallax speed={60} className="lg:pl-4">
+						<div>
+							<Reveal>
+								<Kicker>The photographer</Kicker>
+								<SectionTitle className="mt-6 text-ink-900">
+									Behind
+									<br />
+									the{" "}
+									<span className="italic text-pine-700">
+										lens.
+									</span>
+								</SectionTitle>
+							</Reveal>
+							<Reveal delay={0.1}>
+								<p className="mt-8 max-w-lg text-[15px] leading-[1.95] text-ink-500">
+									My journey began with a fascination for the
+									way light transforms ordinary moments into
+									something extraordinary. Today, my approach
+									is rooted in authenticity, artistic
+									expression, and a belief that the most
+									meaningful images are the ones that make you
+									feel something.
+								</p>
+							</Reveal>
 
-						<div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-ink-900/10 pt-8 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-							{stats.map((s, i) => (
-								<Reveal key={s.label} delay={0.08 * i}>
-									<p className="font-display text-4xl font-light tracking-tight text-wine-600">
-										<CountUp value={s.value} />
-									</p>
-									<Meta className="mt-2 block leading-relaxed text-ink-500">
-										{s.label}
-									</Meta>
-								</Reveal>
-							))}
-						</div>
+							<div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-ink-900/10 pt-8 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+								{stats.map((s, i) => (
+									<Reveal key={s.label} delay={0.08 * i}>
+										<p className="font-display text-4xl font-light tracking-tight text-wine-600">
+											<CountUp value={s.value} />
+										</p>
+										<Meta className="mt-2 block leading-relaxed text-ink-500">
+											{s.label}
+										</Meta>
+									</Reveal>
+								))}
+							</div>
 
-						<Reveal
-							delay={0.15}
-							className="mt-10 flex flex-wrap items-center justify-between gap-6"
-						>
-							<p
-								className="font-display text-4xl italic text-pine-700"
-								aria-hidden="true"
+							<Reveal
+								delay={0.15}
+								className="mt-10 flex flex-wrap items-center justify-between gap-6"
 							>
-								Elena Lore
-							</p>
-							<Link to="/about">
-								<ArrowLink>More about me</ArrowLink>
-							</Link>
-						</Reveal>
-					</div>
+								<p
+									className="font-display text-4xl italic text-pine-700"
+									aria-hidden="true"
+								>
+									Elena Lore
+								</p>
+								<Link to="/about">
+									<ArrowLink>More about me</ArrowLink>
+								</Link>
+							</Reveal>
+						</div>
+					</Parallax>
 				</div>
 			</section>
 
@@ -828,57 +938,67 @@ export default function Home() {
 					}}
 				/>
 				<div className="relative mx-auto max-w-[1600px] px-5 text-center sm:px-8 lg:px-14">
-					{/* scattered frames */}
+					{/* scattered frames, each at its own scroll speed */}
 					<Reveal className="mb-14 flex items-end justify-center gap-5">
 						{ctaStrip.map((img, i) => (
-							<button
+							<Parallax
 								key={img.src}
-								type="button"
-								onClick={() => setLightbox(i)}
-								aria-label={`Open photograph: ${img.alt}`}
-								className={cn(
-									"group w-28 border-[6px] border-cream bg-cream shadow-frame transition-transform duration-500 hover:z-10 hover:scale-105 sm:w-40",
-									i === 0 && "-rotate-6 translate-y-3",
-									i === 1 && "rotate-1 -translate-y-2",
-									i === 2 && "rotate-6 translate-y-4",
-								)}
+								speed={ctaSpeeds[i]}
+								rotate={i === 1 ? -3 : 4}
+								scale={0.12}
 							>
-								<Frame
-									src={img.src}
-									alt={img.alt}
-									className="aspect-[4/5]"
-								/>
-							</button>
+								<button
+									type="button"
+									onClick={() => setLightbox(i)}
+									aria-label={`Open photograph: ${img.alt}`}
+									className={cn(
+										"group block w-28 border-[6px] border-cream bg-cream shadow-frame transition-transform duration-500 hover:z-10 hover:scale-105 sm:w-40",
+										i === 0 && "-rotate-6 translate-y-3",
+										i === 1 && "rotate-1 -translate-y-2",
+										i === 2 && "rotate-6 translate-y-4",
+									)}
+								>
+									<Frame
+										src={img.src}
+										alt={img.alt}
+										className="aspect-[4/5]"
+									/>
+								</button>
+							</Parallax>
 						))}
 					</Reveal>
 
-					<Reveal>
-						<Kicker className="justify-center">
-							Let's create something meaningful
-						</Kicker>
-						<h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(3rem,8vw,7rem)] font-light leading-[0.95] tracking-[-0.04em] text-ink-900">
-							Your story
-							<br />
-							starts{" "}
-							<span className="italic text-wine-600">here.</span>
-						</h2>
-						<p className="mx-auto mt-8 max-w-md text-[15px] leading-[1.95] text-ink-500">
-							Have something special in mind? I would love to hear
-							about it and explore how we can bring your vision to
-							life.
-						</p>
-						<div className="mt-10 flex flex-wrap items-center justify-center gap-7">
-							<Link to="/contact">
-								<ButtonSolid>Start a project</ButtonSolid>
-							</Link>
-							<a
-								href={`mailto:${site.email}`}
-								className="link-rule font-mono text-[11px] uppercase tracking-[0.2em] text-pine-700"
-							>
-								{site.email}
-							</a>
-						</div>
-					</Reveal>
+					<Parallax speed={40} scale={0.05}>
+						<Reveal>
+							<Kicker className="justify-center">
+								Let's create something meaningful
+							</Kicker>
+							<h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(3rem,8vw,7rem)] font-light leading-[0.95] tracking-[-0.04em] text-ink-900">
+								Your story
+								<br />
+								starts{" "}
+								<span className="italic text-wine-600">
+									here.
+								</span>
+							</h2>
+							<p className="mx-auto mt-8 max-w-md text-[15px] leading-[1.95] text-ink-500">
+								Have something special in mind? I would love to
+								hear about it and explore how we can bring your
+								vision to life.
+							</p>
+							<div className="mt-10 flex flex-wrap items-center justify-center gap-7">
+								<Link to="/contact">
+									<ButtonSolid>Start a project</ButtonSolid>
+								</Link>
+								<a
+									href={`mailto:${site.email}`}
+									className="link-rule font-mono text-[11px] uppercase tracking-[0.2em] text-pine-700"
+								>
+									{site.email}
+								</a>
+							</div>
+						</Reveal>
+					</Parallax>
 				</div>
 			</section>
 
