@@ -724,9 +724,27 @@ export default function Home() {
 		{ src: projects[7].cover, alt: projects[7].alt },
 	];
 	const ctaSpeeds = [100, -80, 140];
+	const ref = useRef<HTMLElement>(null);
+
+	const reduce = useReducedMotion();
+
+	const { scrollYProgress } = useScroll({
+		target: ref,
+		offset: ["start start", "end start"],
+	});
+	const apertureY = useTransform(
+		scrollYProgress,
+		[0, 1],
+		["0%", reduce ? "0%" : "120%"],
+	);
+	const apertureRotate = useTransform(
+		scrollYProgress,
+		[0, 1],
+		[0, reduce ? 0 : 90],
+	);
 
 	return (
-		<>
+		<section ref={ref}>
 			<Hero />
 
 			{/* marquee */}
@@ -822,15 +840,29 @@ export default function Home() {
 
 			{/* ————— about preview ————— */}
 			<section className="relative overflow-hidden bg-cream-100 py-24 sm:py-32">
-				<Parallax
-					speed={-150}
-					className="pointer-events-none absolute -bottom-24 -right-24"
+				<motion.div
+					aria-hidden="true"
+					style={{ y: apertureY, rotate: apertureRotate }}
+					className="pointer-events-none absolute bottom-48 -right-24 hidden h-[380px] w-[380px] lg:block"
 				>
-					<Aperture
+					{/* <Aperture
 						className="h-[340px] w-[340px] text-pine-700/[0.06] animate-spin-slower"
 						strokeWidth={0.6}
+					/> */}
+					<div
+						className="h-full w-full animate-spin-slower bg-wine-600 opacity-20"
+						style={{
+							WebkitMaskImage: `url(${aperture.src})`,
+							maskImage: `url(${aperture.src})`,
+							WebkitMaskSize: "contain",
+							maskSize: "contain",
+							WebkitMaskRepeat: "no-repeat",
+							maskRepeat: "no-repeat",
+							WebkitMaskPosition: "center",
+							maskPosition: "center",
+						}}
 					/>
-				</Parallax>
+				</motion.div>
 				<div className="relative mx-auto grid max-w-[1600px] items-center gap-16 px-5 sm:px-8 lg:grid-cols-2 lg:gap-24 lg:px-14">
 					<Reveal className="relative mx-auto w-full max-w-[520px]">
 						<div
@@ -1008,6 +1040,6 @@ export default function Home() {
 				onClose={() => setLightbox(null)}
 				onIndex={setLightbox}
 			/>
-		</>
+		</section>
 	);
 }

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { services, site } from "../data/content";
 import { Link } from "@/lib/router";
 import { Aperture, FilmStrip, Meta } from "./primitives";
+import aperture from "@/pictures/aperture.png";
 
 const nav = [
 	{ label: "Home", to: "/" },
@@ -69,16 +70,31 @@ export default function Footer() {
 					<div className="relative z-10 max-w-sm">
 						<Link
 							to="/"
-							className="group inline-flex items-center gap-4"
+							className="group flex items-center gap-3"
+							aria-label="ÉLORE — home"
 						>
-							<Aperture className="h-12 w-12 text-brass-400 transition-transform duration-700 group-hover:rotate-90" />
-
+							<span className="relative flex h-10 w-10 items-center justify-center">
+								<span
+									role="img"
+									aria-label="ÉLORE logo"
+									className="block h-8 w-8 bg-white transition-transform duration-700 group-hover:rotate-[60deg]"
+									style={{
+										WebkitMaskImage: `url(${aperture.src})`,
+										maskImage: `url(${aperture.src})`,
+										WebkitMaskSize: "contain",
+										maskSize: "contain",
+										WebkitMaskRepeat: "no-repeat",
+										maskRepeat: "no-repeat",
+										WebkitMaskPosition: "center",
+										maskPosition: "center",
+									}}
+								/>
+							</span>
 							<span className="flex flex-col leading-none">
-								<span className="font-display text-3xl tracking-[0.14em]">
+								<span className="font-display text-[22px] tracking-[0.14em] text-white">
 									ÉLORE
 								</span>
-
-								<span className="mt-1.5 font-mono text-[9px] uppercase tracking-[0.34em] text-cream/40">
+								<span className="mt-1 font-mono text-[8px] uppercase tracking-[0.34em] text-white">
 									Visual Stories
 								</span>
 							</span>
