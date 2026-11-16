@@ -318,7 +318,7 @@ export const services: Service[] = [
 		title: "Wedding Photography",
 		subtitle: "Your day. Your people. Your story.",
 		heroTitle: "The art of forever.",
-		price: "from €2,400",
+		price: "from ₹2,400",
 		shortDescription:
 			"Your wedding day is a collection of fleeting moments, quiet emotions, and people who mean everything. Preserve the feeling of your celebration through timeless photographs.",
 		description:
@@ -385,7 +385,7 @@ export const services: Service[] = [
 		title: "Portrait Photography",
 		subtitle: "An honest expression of you.",
 		heroTitle: "Your story, in focus.",
-		price: "from €380",
+		price: "from ₹380",
 		shortDescription:
 			"Thoughtful portraits that celebrate individuality through natural light, meaningful composition, and an effortless photographic experience.",
 		description:
@@ -452,7 +452,7 @@ export const services: Service[] = [
 		title: "Editorial Photography",
 		subtitle: "Imagery with a point of view.",
 		heroTitle: "A vision, made visible.",
-		price: "from €1,200 / day",
+		price: "from ₹1,200 / day",
 		shortDescription:
 			"Distinctive visual storytelling for fashion, creative campaigns, and brands that want their imagery to communicate more than a product.",
 		description:
@@ -519,7 +519,7 @@ export const services: Service[] = [
 		title: "Lifestyle Photography",
 		subtitle: "Life, exactly as it feels.",
 		heroTitle: "Life, exactly as it feels.",
-		price: "from €520",
+		price: "from ₹520",
 		shortDescription:
 			"Unscripted sessions for families, couples and makers — honest photographs of your everyday, made in the places where your life actually happens.",
 		description:
