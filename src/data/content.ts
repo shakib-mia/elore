@@ -77,7 +77,7 @@ export const projects: Project[] = [
 		index: "01",
 		title: "The Art of Together",
 		category: "Wedding",
-		location: "Tuscany, Italy",
+		location: "Udaipur, Rajasthan, India",
 		year: "2025",
 		cover: px(17657612, 1500, 1100),
 		alt: "A bride and groom in golden evening light amid Tuscan hills",
@@ -92,8 +92,8 @@ export const projects: Project[] = [
 		quote: "The most meaningful photographs are rarely the ones you plan.",
 		gallery: [
 			{
-				src: px(17000493, 1500, 1000),
-				alt: "Newlyweds embracing in a sunlit meadow",
+				src: px(17657615, 1500, 1000),
+				alt: "Elegant Indian couple in wedding attire posing in a serene rural landscape",
 				wide: true,
 			},
 			{
@@ -116,7 +116,7 @@ export const projects: Project[] = [
 		index: "02",
 		title: "In Her Own Light",
 		category: "Portrait",
-		location: "Paris, France",
+		location: "Mumbai, Maharashtra, India",
 		year: "2025",
 		cover: px(39767268, 1100, 1400),
 		alt: "A woman seated in a dark room, shaped by a single window of light",
@@ -150,7 +150,7 @@ export const projects: Project[] = [
 		index: "03",
 		title: "Between Earth & Sky",
 		category: "Landscape",
-		location: "Kannur, India",
+		location: "Munnar, Kerala, India",
 		year: "2024",
 		cover: px(8282510, 1100, 1400),
 		alt: "Scenic view of a tropical river lined with lush coconut trees under blue skies",
@@ -184,7 +184,7 @@ export const projects: Project[] = [
 		index: "04",
 		title: "The Quiet Elegance",
 		category: "Editorial",
-		location: "London, UK",
+		location: "Jaipur, Rajasthan, India",
 		year: "2025",
 		cover: px(11624988, 1500, 1100),
 		alt: "A model in satin and leather gloves, lit like an old master painting",
@@ -218,10 +218,10 @@ export const projects: Project[] = [
 		index: "05",
 		title: "Moments in Between",
 		category: "Wedding",
-		location: "Lake Como, Italy",
+		location: "Udaipur, Rajasthan, India",
 		year: "2024",
-		cover: px(38270639, 1100, 1400),
-		alt: "A couple walking hand in hand at golden hour",
+		cover: px(10119054, 1100, 1400),
+		alt: "A couple poses in vibrant traditional clothing indoors surrounded by floral decor",
 		layout: "small",
 		camera: "Leica M6",
 		film: "Kodak Gold 200",
@@ -233,97 +233,34 @@ export const projects: Project[] = [
 		quote: "The schedule remembers the ceremony. The photographs remember everything else.",
 		gallery: [
 			{
-				src: px(10074778, 1500, 1000),
-				alt: "A quiet meadow moment at sunset",
+				src: px(30184689, 1500, 1000),
+				alt: "A joyful couple exchanging rings during their engagement ceremony, showcasing love and happiness",
 				wide: true,
 			},
 			{
-				src: px(15865452, 1000, 1300),
-				alt: "Sunlight falling over a couple in a field",
+				src: px(10119058, 1000, 1300),
+				alt: "Stunning portrait of a couple in traditional attire enjoying a charming indoor wedding setting",
 			},
 			{
-				src: px(27499475, 1500, 1000),
-				alt: "Newlyweds laughing in a glowing meadow",
-				wide: true,
-			},
-		],
-	},
-	{
-		slug: "a-study-of-light",
-		index: "06",
-		title: "A Study of Light",
-		category: "Portrait",
-		location: "Copenhagen, Denmark",
-		year: "2024",
-		cover: px(12407370, 1500, 1100),
-		alt: "A close portrait carved by warm directional light",
-		layout: "large",
-		camera: "Hasselblad 500C/M",
-		film: "Ilford HP5 Plus",
-		frames: "420 frames · 22 kept",
-		story: [
-			"A personal project made over one grey Copenhagen week, in a borrowed studio with one window, one reflector and eleven strangers who answered an open call. Each sitter received the same brief: forty minutes, no mirror, no small talk after the first ten.",
-			"Stripped of styling and set, the series becomes an honest ledger of what light does to a face — and what a face does when it stops being watched and starts, simply, to think.",
-		],
-		quote: "Light is the only direction most portraits ever need.",
-		gallery: [
-			{
-				src: px(36991336, 1000, 1300),
-				alt: "A portrait washed in red and blue light",
+				src: px(10119059, 1000, 1300),
+				alt: "Beautiful portrait of a South Asian couple in traditional attire, celebrating love",
 			},
 			{
-				src: px(16458598, 1000, 1300),
-				alt: "A low-light study with creative makeup",
-			},
-			{
-				src: px(35478383, 1500, 1000),
-				alt: "Shadow patterns across a contemplative face",
+				src: px(20021563, 1500, 1000),
+				alt: "Charming portrait of an Indian couple during their wedding ceremony, capturing traditional elegance",
 				wide: true,
 			},
 		],
 	},
-	{
-		slug: "the-art-of-simplicity",
-		index: "07",
-		title: "The Art of Simplicity",
-		category: "Editorial",
-		location: "Milan, Italy",
-		year: "2024",
-		cover: px(1066171, 1100, 1400),
-		alt: "A fashion study in a moody minimalist studio",
-		layout: "small",
-		camera: "Canon EOS R5",
-		film: "Digital · studio",
-		frames: "1,120 frames · 31 kept",
-		story: [
-			"For a Milanese design house we removed everything removable: one chair, one lamp, one colour story per look. The clothes were built on subtraction, and the photographs had to honour that discipline.",
-			"What is left when a fashion image gives up its props? Gesture. Fabric doing its slow arithmetic. A model holding stillness like a note. Simplicity, it turns out, is the hardest set to build — and the easiest to love.",
-		],
-		quote: "Remove everything you can. Photograph what refuses to leave.",
-		gallery: [
-			{
-				src: px(9101751, 1500, 1000),
-				alt: "A reflective silver jacket against a quiet backdrop",
-				wide: true,
-			},
-			{
-				src: px(33714925, 1000, 1300),
-				alt: "A figure in black against deep red studio light",
-			},
-			{
-				src: px(24972993, 1000, 1300),
-				alt: "A minimalist monochrome studio composition",
-			},
-		],
-	},
+
 	{
 		slug: "where-the-wild-things-are",
 		index: "08",
 		title: "Where the Wild Things Are",
 		category: "Landscape",
-		location: "Highlands, Iceland",
+		location: "Ladakh, India",
 		year: "2023",
-		cover: px(14057789, 1500, 1100),
+		cover: px(38087449, 1500, 1100),
 		alt: "Sunrise breaking over an untamed mountain range",
 		layout: "large",
 		camera: "Canon EOS R5",
@@ -336,16 +273,16 @@ export const projects: Project[] = [
 		quote: "Some places don't need a photographer. They allow one.",
 		gallery: [
 			{
-				src: px(13061095, 1500, 1000),
+				src: px(40060321, 1500, 1000),
 				alt: "An aerial view of ridgelines at dusk",
 				wide: true,
 			},
 			{
-				src: px(38511506, 1000, 1300),
+				src: px(5200951, 1000, 1300),
 				alt: "Light rays over a misty highland range",
 			},
 			{
-				src: px(6447769, 1000, 1300),
+				src: px(23476471, 1000, 1300),
 				alt: "Layered mountain silhouettes in warm haze",
 			},
 		],
@@ -388,8 +325,8 @@ export const services: Service[] = [
 			"A wedding is not just a celebration. It is a collection of fleeting moments, quiet emotions, and people who mean everything. My approach combines honest storytelling with an editorial eye, preserving the feeling of your day in photographs you will return to for years to come.",
 		philosophy:
 			"The most meaningful photographs are rarely the ones you plan. They happen in the glance across the room, the hand held a little tighter, and the laughter that arrives when nobody is watching.",
-		heroImage: px(36680604, 1800, 1100),
-		previewImage: px(36862797, 700, 880),
+		heroImage: px(17657612, 1800, 1100),
+		previewImage: px(17657612, 700, 880),
 		idealFor:
 			"Couples who value genuine emotion, meaningful details, and timeless imagery.",
 		duration: "Half-day or full-day coverage",
@@ -405,13 +342,16 @@ export const services: Service[] = [
 		],
 		gallery: [
 			{
-				src: px(36862797, 1000, 1300),
-				alt: "A couple celebrating in evening light",
+				src: px(32495457, 1000, 1300),
+				alt: "A beautiful Indian bride and groom embrace under a vibrant red veil on their wedding day",
 			},
-			{ src: px(10074778, 1000, 1300), alt: "An intimate meadow moment" },
 			{
-				src: px(15861935, 1500, 1000),
-				alt: "Walking away into golden grassland",
+				src: px(8565495, 1000, 1300),
+				alt: "Beautiful Indian couple in traditional attire at their wedding ceremony in Surat, India",
+			},
+			{
+				src: px(27876572, 1500, 1000),
+				alt: "Elegant couple in traditional attire celebrating an Indian wedding outdoors",
 				wide: true,
 			},
 		],
@@ -452,8 +392,8 @@ export const services: Service[] = [
 			"Portrait photography is an opportunity to see yourself from a different perspective. Through natural light, thoughtful composition, and gentle direction, I create images that feel personal rather than posed — photographs that reflect who you are, not simply how you look.",
 		philosophy:
 			"You don't need to know how to pose or perform in front of a camera. The best portraits begin with a comfortable atmosphere, a little patience, and the freedom to be yourself.",
-		heroImage: px(39184007, 1800, 1100),
-		previewImage: px(2908922, 700, 880),
+		heroImage: px(35834900, 1800, 1100),
+		previewImage: px(35834900, 700, 880),
 		idealFor:
 			"Individuals, creatives, professionals, and people building a personal brand.",
 		duration: "A relaxed 2-hour individual session",
@@ -469,15 +409,15 @@ export const services: Service[] = [
 		],
 		gallery: [
 			{
-				src: px(2908922, 1000, 1300),
+				src: px(7813769, 1000, 1300),
 				alt: "A portrait shaped by window light",
 			},
 			{
-				src: px(12407370, 1000, 1300),
+				src: px(7586064, 1000, 1300),
 				alt: "A close study in warm light",
 			},
 			{
-				src: px(27236808, 1500, 1000),
+				src: px(18477085, 1500, 1000),
 				alt: "A quiet portrait with a book",
 				wide: true,
 			},
@@ -519,8 +459,8 @@ export const services: Service[] = [
 			"Editorial photography brings ideas to life through visual storytelling. From fashion concepts to creative campaigns, every frame is shaped by composition, atmosphere, and intention. The result is imagery with a distinctive visual identity and a story worth exploring.",
 		philosophy:
 			"Great editorial imagery does more than show a product or a person. It creates a feeling, communicates an idea, and invites the viewer into a carefully imagined world.",
-		heroImage: px(33714925, 1800, 1100),
-		previewImage: px(20194705, 700, 880),
+		heroImage: px(36951188, 1800, 1100),
+		previewImage: px(36951188, 700, 880),
 		idealFor:
 			"Fashion labels, independent designers, creative campaigns, and emerging brands.",
 		duration: "Planned around the creative brief",
@@ -536,15 +476,15 @@ export const services: Service[] = [
 		],
 		gallery: [
 			{
-				src: px(20194705, 1000, 1300),
+				src: px(9419184, 1000, 1300),
 				alt: "Satin, pearls and leather in low key light",
 			},
 			{
-				src: px(1066171, 1000, 1300),
+				src: px(24712813, 1000, 1300),
 				alt: "A fashion study in a moody studio",
 			},
 			{
-				src: px(37233404, 1500, 1000),
+				src: px(2863532, 1500, 1000),
 				alt: "A seated editorial composition",
 				wide: true,
 			},
@@ -578,7 +518,7 @@ export const services: Service[] = [
 		number: "04",
 		title: "Lifestyle Photography",
 		subtitle: "Life, exactly as it feels.",
-		heroTitle: "The beauty of the ordinary.",
+		heroTitle: "Life, exactly as it feels.",
 		price: "from €520",
 		shortDescription:
 			"Unscripted sessions for families, couples and makers — honest photographs of your everyday, made in the places where your life actually happens.",
@@ -586,8 +526,8 @@ export const services: Service[] = [
 			"Lifestyle sessions leave the studio behind. We cook, walk, work and play — in your kitchen, your garden, your favourite stretch of coastline — while I photograph the life you already live. No matching outfits required, no smiles on command; just your ordinary days, seen with attention.",
 		philosophy:
 			"Years from now, you will not remember the poses. You will remember the kitchen table, the dog underfoot, the way the afternoon light fell across everyone you love.",
-		heroImage: px(15865452, 1800, 1100),
-		previewImage: px(27499475, 700, 880),
+		heroImage: px(4307927, 1800, 1100),
+		previewImage: px(4307927, 700, 880),
 		idealFor:
 			"Families, couples, artisans and anyone who wants their real life remembered.",
 		duration: "A half-day at home or on location",
@@ -603,16 +543,16 @@ export const services: Service[] = [
 		],
 		gallery: [
 			{
-				src: px(27499475, 1000, 1300),
-				alt: "A glowing meadow at the end of the day",
+				src: px(4307930, 1000, 1300),
+				alt: "A joyful couple sitting on a comfortable sofa indoors, sharing a moment of laughter and connection",
 			},
 			{
-				src: px(27236808, 1000, 1300),
-				alt: "A quiet afternoon with a book",
+				src: px(4307958, 1000, 1300),
+				alt: "Joyful couple relaxing on a cozy couch in their modern living room, enjoying quality time together",
 			},
 			{
-				src: px(14332269, 1500, 1000),
-				alt: "Morning fog over a favourite walking route",
+				src: px(4307964, 1500, 1000),
+				alt: "Cheerful couple lounging on sofa with a laptop, enjoying a relaxing day indoors",
 				wide: true,
 			},
 		],
@@ -668,10 +608,10 @@ export const testimonials = [
 /* ————— shared imagery ————— */
 
 export const imagery = {
-	hero: px(6447769, 1500, 1850),
+	hero: px(13291279, 1500, 1850),
 	heroAlt:
 		"Golden morning light falling across a peaceful mountain landscape",
-	aboutPortrait: px(27517598, 1100, 1400),
+	aboutPortrait: px(37213207, 1100, 1400),
 	aboutHands: px(16992812, 900, 1100),
 	aboutCamera: px(29353326, 900, 700),
 	contactStill: px(38511506, 1000, 1250),

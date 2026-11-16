@@ -291,7 +291,7 @@ function Hero() {
 					className="relative mx-auto w-full max-w-[640px]"
 				>
 					<motion.div style={{ y: imgY }} className="relative">
-						<div className="relative aspect-[4/5] overflow-hidden shadow-lift">
+						<div className="relative aspect-4/5 overflow-hidden shadow-lift">
 							<Frame
 								src={imagery.hero}
 								alt={imagery.heroAlt}
@@ -299,7 +299,7 @@ function Hero() {
 								kenburns
 								className="absolute inset-0"
 							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-pine-950/55 via-transparent to-wine-950/10" />
+							<div className="absolute inset-0 bg-linear-to-t from-pine-950/55 via-transparent to-wine-950/10" />
 							<Corners className="text-cream/80" size="h-7 w-7" />
 
 							{/* viewfinder readouts */}
@@ -497,9 +497,9 @@ function ServicesPreview() {
 									className="-ml-28 -mt-36 w-56 border-[6px] border-cream shadow-lift"
 								>
 									<img
-										src={services[hovered].previewImage}
+										src={services[hovered].heroImage}
 										alt=""
-										className="photo-grade aspect-[4/5] w-full object-cover"
+										className="photo-grade aspect-4/5 w-full object-cover"
 									/>
 								</motion.div>
 							)}
@@ -594,10 +594,7 @@ function Testimonials() {
 				speed={-190}
 				className="pointer-events-none absolute -right-10 -top-10"
 			>
-				<Quote
-					className="h-64 w-64 text-cream/[0.04]"
-					aria-hidden="true"
-				/>
+				<Quote className="h-64 w-64 text-cream/4" aria-hidden="true" />
 			</Parallax>
 			<div className="relative mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-14">
 				<div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24">
@@ -654,7 +651,7 @@ function Testimonials() {
 
 					<Reveal
 						delay={0.12}
-						className="flex min-h-[320px] flex-col justify-center border-t border-cream/15 pt-10 lg:border-l lg:border-t-0 lg:pl-16 lg:pt-0"
+						className="flex min-h-80 flex-col justify-center border-t border-cream/15 pt-10 lg:border-l lg:border-t-0 lg:pl-16 lg:pt-0"
 					>
 						<AnimatePresence mode="wait">
 							<motion.figure
@@ -721,7 +718,7 @@ export default function Home() {
 	const ctaStrip = [
 		{ src: projects[0].gallery[0].src, alt: projects[0].gallery[0].alt },
 		{ src: projects[1].cover, alt: projects[1].alt },
-		{ src: projects[7].cover, alt: projects[7].alt },
+		{ src: projects[7]?.cover, alt: projects[7]?.alt },
 	];
 	const ctaSpeeds = [100, -80, 140];
 	const ref = useRef<HTMLElement>(null);
@@ -873,7 +870,7 @@ export default function Home() {
 							<Frame
 								src={imagery.aboutPortrait}
 								alt="Elena Lore holding a vintage film camera"
-								className="relative aspect-[4/5] shadow-frame"
+								className="relative aspect-4/5 shadow-frame"
 							/>
 						</Parallax>
 						{/* small photo moves faster than the portrait → depth */}
@@ -886,7 +883,7 @@ export default function Home() {
 								<Frame
 									src={imagery.aboutHands}
 									alt="Hands cradling a medium format camera"
-									className="aspect-[4/5]"
+									className="aspect-4/5"
 									grade
 								/>
 							</div>
@@ -993,7 +990,7 @@ export default function Home() {
 									<Frame
 										src={img.src}
 										alt={img.alt}
-										className="aspect-[4/5]"
+										className="aspect-4/5"
 									/>
 								</button>
 							</Parallax>

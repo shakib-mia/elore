@@ -60,7 +60,7 @@ export default function Navbar() {
 			>
 				{/* reading progress */}
 				<motion.div
-					className="absolute inset-x-0 top-0 h-[2.5px] origin-left bg-gradient-to-r from-wine-600 via-wine-500 to-brass-500"
+					className="absolute inset-x-0 top-0 h-[2.5px] origin-left bg-linear-to-r from-wine-600 via-wine-500 to-brass-500"
 					style={{ scaleX: progress }}
 				/>
 				<div className="mx-auto flex h-[72px] max-w-[1600px] items-center justify-between px-5 sm:px-8 lg:px-14">
